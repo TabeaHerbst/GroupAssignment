@@ -4,6 +4,7 @@ import pickle
 import os
 import requests
 from io import BytesIO
+from PIL import Image
 
 # Determine the absolute path to the model file
 base_path = os.path.dirname("healthy_habits.py")   # Assuming this script is in the root of your Streamlit app
