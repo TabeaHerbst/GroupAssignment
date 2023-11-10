@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
-from scipy.stats import boxcox
 from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 
