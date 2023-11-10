@@ -7,12 +7,12 @@ from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 
 def smoking03():
-    # Load the XGBoost model
-    #with open('ML_Group_xgBoost_Smoking_model.final.model', 'rb') as f:
-    #   model = pickle.load(f)
+    base_path = os.path.dirname("smoking03.py") 
+    model_path = os.path.join(base_path, 'ML_Group_xgBoost_Smoking_Model_final.model')
 
+    # Load the XGBoost model
     model = xgb.Booster()
-    model.load_model('ML_Group_xgBoost_Smoking_Model_final.model') 
+    model.load_model(model_path) 
 
 
     def transform_data(data):
@@ -42,9 +42,9 @@ def smoking03():
     st.markdown("<h1 style='text-align: center;'> 🚬Smoking Prediction App 📊</h1>", unsafe_allow_html=True)
 
     # Centered image
-    col1, col2, col3 = st.columns(3)  # Create three columns for layout
-    with col2:  # Use the middle column for the centered image
-        st.image('media/smoking_.jpg', width=500, use_column_width=False)
+   # col1, col2, col3 = st.columns(3)  # Create three columns for layout
+   # with col2:  # Use the middle column for the centered image
+      #  st.image('media/smoking_.jpg', width=500, use_column_width=False)
 
 
 
