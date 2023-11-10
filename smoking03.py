@@ -10,7 +10,18 @@ import xgboost as xgb
 
 def transform_data(data):
     # Transform continuous age into age bucket
-    data['age'] = pd.cut(data['age'], bins=range(20, 130, 5), right=False)
+    data['age_bucket'] = pd.cut(data['age'], bins=range(20, 130, 5), right=False)
+
+    # Define a function to map continuous age to age bucket
+    def map_age_to_bucket(age):
+        return int((age // 5) * 5)
+
+    # Apply the transformation to the 'age' column
+    data['age'] = data['age'].apply(map_age_to_bucket)
+    data.drop('age_bucket', axis=1, inplace=True)
+
+    # Convert Pandas Interval to its midpoint
+    data['age'] = data['age'].apply(lambda x: x.mid if isinstance(x, pd.Interval) else x)
 
     # Calculate 'heightXhemoglobin' without scaling
     data['heightXhemoglobin'] = data['height(cm)'] * data['hemoglobin']
