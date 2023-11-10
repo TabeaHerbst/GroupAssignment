@@ -56,9 +56,9 @@ def healthy_habits():
     st.markdown("<h1 style='text-align: center;'>Healthy Habits Classificator 🍏🏋️‍♂️🌞</h1>", unsafe_allow_html=True)
     
     # Centered image
-    col1, col2, col3 = st.columns(3)  # Create three columns for layout
-    with col2:  # Use the middle column for the centered image
-        st.image('media/healthy.jpg', width=500, use_column_width=False)
+    #col1, col2, col3 = st.columns(3)  # Create three columns for layout
+   # with col2:  # Use the middle column for the centered image
+        #st.image('media/healthy.jpg', width=500, use_column_width=False)
 
     # Get user input
     input_df = user_input_features()
