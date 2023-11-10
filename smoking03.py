@@ -6,48 +6,35 @@ from scipy.stats import boxcox
 from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 
-def smoking03():
-    base_path = os.path.dirname("smoking03.py") 
-    model_path = os.path.join(base_path, 'ML_Group_xgBoost_Smoking_Model_final.model')
+# Define the functions
 
+def transform_data(data):
+    # Transform continuous age into age bucket
+    data['age'] = pd.cut(data['age'], bins=range(20, 130, 5), right=False)
+
+    # Calculate 'heightXhemoglobin' without scaling
+    data['heightXhemoglobin'] = data['height(cm)'] * data['hemoglobin']
+
+    return data
+
+# Function to predict using the XGBoost model
+def predict_smoker(data):
+    data = np.array(data).reshape(1, -1)
+    dmatrix = xgb.DMatrix(data)
+    prediction = model.predict(dmatrix)
+    return prediction[0]
+
+def smoking03():
     # Load the XGBoost model
     model = xgb.Booster()
-    model.load_model(model_path) 
-
-
-    def transform_data(data):
-        # Transform continuous age into age bucket
-        data['age_bucket'] = pd.cut(data['age'], bins=range(20, 130, 5), right=False)
-
-        # Define a function to map continuous age to age bucket
-        def map_age_to_bucket(age):
-            return int((age // 5) * 5)
-
-        # Apply the transformation to the 'age' column
-        data['age'] = data['age'].apply(map_age_to_bucket)
-        data.drop('age_bucket', axis=1, inplace=True)
-
-        # Calculate 'heightXhemoglobin' without scaling
-        data['heightXhemoglobin'] = data['height(cm)'] * data['hemoglobin']
-
-        return data
-
-    # Function to predict using the XGBoost model
-    def predict_smoker(data):
-        data = np.array(data).reshape(1, -1)
-        dmatrix = xgb.DMatrix(data)
-        prediction = model.predict(dmatrix)
-        return prediction[0]
+    model.load_model('ML_Group_xgBoost_Smoking_Model_final.model') 
 
     st.markdown("<h1 style='text-align: center;'> 🚬Smoking Prediction App 📊</h1>", unsafe_allow_html=True)
 
     # Centered image
-   # col1, col2, col3 = st.columns(3)  # Create three columns for layout
-   # with col2:  # Use the middle column for the centered image
-      #  st.image('media/smoking_.jpg', width=500, use_column_width=False)
-
-
-
+    col1, col2, col3 = st.columns(3)  # Create three columns for layout
+    with col2:  # Use the middle column for the centered image
+        st.image('media/smoking_.jpg', width=500, use_column_width=False)
 
     st.write("Tobacco kills up to 8 million people annually worldwide.\
         Smoking causes a range of diseases like cancer, strokes and several lung and heart diseases.\
@@ -118,3 +105,7 @@ def smoking03():
     if st.button("Predict"):
         prediction = predict_smoker(transformed_input)
         st.write(f"**The patient is a {'Smoker' if prediction > 0.5 else 'Non-Smoker'}**.")
+
+# Call the function to run the Streamlit app
+smoking03()
+
