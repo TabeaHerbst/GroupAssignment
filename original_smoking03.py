@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 
 def smoking03():
-    base_path = os.path.dirname("smoking03.py")  # Assuming this script is in the root of your Streamlit app
+    base_path = os.path.dirname("original_smoking03.py")  # Assuming this script is in the root of your Streamlit app
     model_path = os.path.join(base_path, 'ML_Group_xgBoost_Smoking_Model_final.model')
 
     # Load the XGBoost model
