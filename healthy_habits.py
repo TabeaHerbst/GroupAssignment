@@ -67,10 +67,9 @@ def healthy_habits():
     response = requests.get(image_url)
     image_bytes = BytesIO(response.content)
 
-    # Centered image
     col1, col2, col3 = st.columns(3)  # Create three columns for layout
     with col2:  # Use the middle column for the centered image
-        st.image('media/healthy.jpg', width=500, use_column_width=False)
+        st.image(image_bytes, width=500, use_column_width=False)
 
     # Get user input
     input_df = user_input_features()
