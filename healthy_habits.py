@@ -1,11 +1,16 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
-# Load the model
-model_path = 'trained_health_SVClassification_model.sav'  # Replace with the actual path to your pickled model
+# Determine the absolute path to the model file
+base_path = os.path.dirname(healthy_habits.py)  # Assuming this script is in the root of your Streamlit app
+model_path = os.path.join(base_path, 'trained_health_SVClassification_model.sav')
+
+# Load the pickled model
 with open(model_path, 'rb') as file:
     model = pickle.load(file)
+
 
 def healthy_habits():
     # Function to take inputs
