@@ -57,19 +57,18 @@ def healthy_habits():
 
     st.markdown("<h1 style='text-align: center;'>Healthy Habits Classificator 🍏🏋️‍♂️🌞</h1>", unsafe_allow_html=True)
     
-    github_repo = "TabeaHerbst/GroupAssignment"
-    branch = "media"  # Replace with the branch name
-
-    # Construct the URL for the raw image
-    image_url = f"https://raw.githubusercontent.com/GroupAssignment/tree/media/healthy.jpg"
+    # Specify the URL of the image
+    image_url = "https://github.com/TabeaHerbst/GroupAssignment/blob/media/health.jpg"
 
     # Fetch the image from the URL
     response = requests.get(image_url)
-    image_bytes = BytesIO(response.content)
 
-    col1, col2, col3 = st.columns(3)  # Create three columns for layout
-    with col2:  # Use the middle column for the centered image
-        st.image(image_bytes, width=500, use_column_width=False)
+    # Load the image using PIL
+    if response.status_code == 200:
+        image = Image.open(BytesIO(response.content))
+        # Now you can work with the 'image' object
+    else:
+        print(f"Failed to load image. HTTP status code: {response.status_code}")
 
     # Get user input
     input_df = user_input_features()
