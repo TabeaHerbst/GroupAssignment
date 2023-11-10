@@ -4,7 +4,7 @@ import joblib
 import os
 
 # Determine the absolute path to the model file
-base_path = os.path.dirname(healthy_habits.py)  # Assuming this script is in the root of your Streamlit app
+base_path = os.path.dirname("healthy_habits.py")   # Assuming this script is in the root of your Streamlit app
 model_path = os.path.join(base_path, 'trained_health_SVClassification_model.sav')
 
 # Load the pickled model
