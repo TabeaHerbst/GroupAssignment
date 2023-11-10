@@ -3,7 +3,9 @@ import pandas as pd
 import joblib
 
 # Load the model
-model = joblib.load('trained_health_SVClassification_model.sav')
+model_path = 'trained_health_SVClassification_model.sav'  # Replace with the actual path to your pickled model
+with open(model_path, 'rb') as file:
+    model = pickle.load(file)
 
 def healthy_habits():
     # Function to take inputs
