@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
+import requests
+from io import BytesIO
 
 # Determine the absolute path to the model file
 base_path = os.path.dirname("healthy_habits.py")   # Assuming this script is in the root of your Streamlit app
@@ -55,10 +57,20 @@ def healthy_habits():
 
     st.markdown("<h1 style='text-align: center;'>Healthy Habits Classificator 🍏🏋️‍♂️🌞</h1>", unsafe_allow_html=True)
     
+    github_repo = "TabeaHerbst/GroupAssignment"
+    branch = "media"  # Replace with the branch name
+
+    # Construct the URL for the raw image
+    image_url = f"https://raw.githubusercontent.com/GroupAssignment/tree/media/healthy.jpg"
+
+    # Fetch the image from the URL
+    response = requests.get(image_url)
+    image_bytes = BytesIO(response.content)
+
     # Centered image
-    #col1, col2, col3 = st.columns(3)  # Create three columns for layout
-   # with col2:  # Use the middle column for the centered image
-        #st.image('media/healthy.jpg', width=500, use_column_width=False)
+    col1, col2, col3 = st.columns(3)  # Create three columns for layout
+    with col2:  # Use the middle column for the centered image
+        st.image('media/healthy.jpg', width=500, use_column_width=False)
 
     # Get user input
     input_df = user_input_features()
