@@ -32,9 +32,9 @@ def smoking03():
     st.markdown("<h1 style='text-align: center;'> 🚬Smoking Prediction App 📊</h1>", unsafe_allow_html=True)
 
     # Centered image
-    col1, col2, col3 = st.columns(3)  # Create three columns for layout
-    with col2:  # Use the middle column for the centered image
-        st.image('media/smoking_.jpg', width=500, use_column_width=False)
+    #col1, col2, col3 = st.columns(3)  # Create three columns for layout
+    #with col2:  # Use the middle column for the centered image
+       # st.image('media/smoking_.jpg', width=500, use_column_width=False)
 
     st.write("Tobacco kills up to 8 million people annually worldwide.\
         Smoking causes a range of diseases like cancer, strokes and several lung and heart diseases.\
